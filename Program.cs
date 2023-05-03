@@ -1,23 +1,20 @@
 using System;
 using System.Windows.Forms;
-using Microsoft.AspNetCore.Components.WebView.WindowsForms;
 using Microsoft.Extensions.DependencyInjection;
 
-internal static class Program
+static class Program
 {
-    internal static readonly Form Form = new();
-    [STAThread] static void Main() => Application.Run(Form);
-    static Program()
+    [STAThread]
+    static void Main() => Application.Run(new Form
     {
-        ServiceCollection services = new();
-        services.AddWindowsFormsBlazorWebView();
-        BlazorWebView webview = new()
-        {
-            Dock = DockStyle.Fill,
-            HostPage = "wwwroot/index.html",
-            Services = services.BuildServiceProvider(),
-        };
-        webview.RootComponents.Add<BlazorWinFormMicroTemplate.Counter>("#app");
-        Form.Controls.Add(webview);
-    }
+        Controls = {
+            new Microsoft.AspNetCore.Components.WebView.WindowsForms.BlazorWebView
+            {
+                Dock = DockStyle.Fill,
+                HostPage = "wwwroot/index.html",
+                Services = new ServiceCollection().AddWindowsFormsBlazorWebView().Services.BuildServiceProvider(),
+                RootComponents = { new("#app", typeof(BlazorWinFormMicroTemplate.Counter), null) },
+            }
+        }
+    });
 }
