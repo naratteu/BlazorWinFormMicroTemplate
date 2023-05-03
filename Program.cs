@@ -1,5 +1,3 @@
-using System;
-using System.Windows.Forms;
 using Microsoft.Extensions.DependencyInjection;
 
 static class Program
