@@ -10,7 +10,7 @@ static class Program
             {
                 Dock = DockStyle.Fill,
                 HostPage = "wwwroot/index.html",
-                Services = new ServiceCollection().AddWindowsFormsBlazorWebView().Services.BuildServiceProvider(),
+                Services = new ServiceCollection().AddBlazorWebViewDeveloperTools().AddWindowsFormsBlazorWebView().Services.BuildServiceProvider(),
                 RootComponents = { new("#app", typeof(BlazorWinFormMicroTemplate.Counter), null) },
             }
         }
